@@ -1,0 +1,16 @@
+.row{
+    margin-bottom:10px;
+}
+
+.btn {
+    width: 100%;
+}
+
+#stageSelect, #taskInput, #delete{
+    width: 100%;
+    
+}
+
+.card {
+    min-height: 100%;
+}
