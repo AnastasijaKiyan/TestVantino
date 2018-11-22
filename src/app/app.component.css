@@ -12,5 +12,13 @@
 }
 
 .card {
-    min-height: 100%;
+    min-height: 450px;
+}
+
+#delete{
+    min-height: 85px;
+    color: white;
+    padding-top: 30px;
+    padding-bottom: auto;
+    position: absolute;
 }
