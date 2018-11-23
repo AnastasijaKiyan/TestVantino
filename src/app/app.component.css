@@ -1,3 +1,4 @@
+
 .row{
     margin-bottom:10px;
 }
@@ -6,19 +7,20 @@
     width: 100%;
 }
 
-#stageSelect, #taskInput, #delete{
+#stageSelect, #taskInput, #dropzone-delete{
     width: 100%;
     
 }
 
 .card {
-    min-height: 450px;
+    min-height: 400px;
 }
 
-#delete{
-    min-height: 85px;
+#dropzone-delete{
+    min-height: 135px;
     color: white;
-    padding-top: 30px;
+    padding-top: 55px;
     padding-bottom: auto;
-    position: absolute;
+
+  
 }

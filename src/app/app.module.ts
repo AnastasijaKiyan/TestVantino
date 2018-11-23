@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { BasicComponent } from './basic/basic.component';
 import { TaskStageRepositoryService } from './task-stage-repository.service';
 import { TaskRepositoryService } from './task-repository.service';
+import { DraggableModule } from './draggable/draggble.module';
 
 
 @NgModule({
@@ -13,7 +14,8 @@ import { TaskRepositoryService } from './task-repository.service';
     BasicComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    DraggableModule
   ],
   providers: [TaskRepositoryService, TaskStageRepositoryService],
   bootstrap: [AppComponent]

@@ -20,8 +20,12 @@ export class TaskStageRepositoryService implements Repository<TaskStage> {
     throw new Error("Method not implemented.");
   }
 
-  Read(predicate: ((TaskStage) => boolean)): TaskStage[] {
-    return this.taskStageArray.filter(predicate);
+  Read(predicate: ((TaskStage) => boolean) = null): TaskStage[] {
+    if (predicate == null) {
+      return this.taskStageArray;
+    } else {
+      return this.taskStageArray.filter(predicate); 
+    }
   }
 
   constructor() { 
