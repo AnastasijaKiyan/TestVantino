@@ -13,37 +13,45 @@ function remove(newTask: Task, taskRep: Task[]) {
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.scss']
 })
- export class AppComponent{
+export class AppComponent {
   title = 'TestVantino';
 
-  private newTask: Task;
+  public newTask: Task;
 
-  dropzone1: Task[] = [];
+  public currentTask: Task;
 
-  dropzone2: Task[] = [];
-
-  dropzone3: Task[] = [];
-  
   constructor(
-   private taskRep: TaskRepositoryService,
-   private stageRep: TaskStageRepositoryService) {
-    this.newTask = new Task(0, "", 0);
-   }
-
-  onCreate() {
-    this.taskRep.Create(this.newTask);
+    private taskRep: TaskRepositoryService,
+    private stageRep: TaskStageRepositoryService) {
+    this.CreateNewTask();
   }
 
-  // onMove(box: string, toList: string[]): void {
-  //   remove(box, this.dropzone1);
-  //   remove(box, this.dropzone2);
-  //   remove(box, this.dropzone3);
+  private CreateNewTask() {
+    this.newTask = new Task(0, "", 0);
+  }
 
-  //   toList.push(box);
-  // }
+  stageSelected = document.getElementById("stageSelect");
 
- 
+  onCreate() {
+    if (this.stageSelected.nodeValue.length >= 1) {
+      this.taskRep.Create(this.newTask)
+      this.CreateNewTask();
+    } else {
+      this.CreateNewTask();
+    }
+  }
 
+  onReset() {
+    this.CreateNewTask();
+  }
+
+  move(task: Task, taskStageId: number): void {
+    task.taskStageId = taskStageId;
+  }
+
+  delete(task: Task): void {
+    this.taskRep.Delete(task);
+  }
 }

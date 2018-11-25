@@ -1,3 +1,17 @@
+.box-2 {
+    // display: inline-block;
+    min-width: 312px;
+    min-height: 50px;
+    padding-top: 10px;
+  
+    &.dragging {
+      background: coral;
+    }
+  }
+.box-1 {
+    min-height: 50px;
+    padding-top: 10px;
+}
 
 .row{
     margin-bottom:10px;
@@ -29,6 +43,6 @@
     }
   
 .dropzone-entered {
-      background-color: #efefef;
-    }
-  
+   background-color: #efefef;
+}
+

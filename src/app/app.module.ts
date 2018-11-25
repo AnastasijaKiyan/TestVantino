@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { BasicComponent } from './basic/basic.component';
@@ -15,7 +16,8 @@ import { DraggableModule } from './draggable/draggble.module';
   ],
   imports: [
     BrowserModule,
-    DraggableModule
+    DraggableModule,
+    FormsModule
   ],
   providers: [TaskRepositoryService, TaskStageRepositoryService],
   bootstrap: [AppComponent]

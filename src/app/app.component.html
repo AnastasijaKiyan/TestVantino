@@ -4,71 +4,72 @@
       <div class="row">
         <div class="col">
           <label for="task-input">Task:</label><br />
-          <input name="task-input" id="taskInput">
+          <input name="task-input" id="taskInput" [(ngModel)]="newTask.title" required>
         </div>
       </div>
       <div class="row">
         <div class="col">
           <label for="stage-select">Stage:</label><br />
-          <select name="stage-select" id="stageSelect">
-            <option *ngFor="let stage of stageRep.Read()">{{stage.name}}</option>
+          <select name="stage-select" id="stageSelect" [(ngModel)]="newTask.taskStageId">
+            <option *ngFor="let stage of stageRep.Read()" [value]="stage.id" [selected]="stage.id == 1">{{stage.name}}
+            </option>
           </select>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          <input class="btn btn-secondary" value="RESET">
+          <input type="button" class="btn btn-secondary" value="RESET" (click)="onReset()">
         </div>
         <div class="col">
-          <input class="btn btn-secondary" value="CREATE">
+          <input  type="button" class="btn btn-secondary" value="CREATE" (click)="onCreate()">
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col ">
-      <div class="card dropzone" id="cardTodo">
+      <div class="card dropzone" id="cardTodo" appDropzone (drop)="move(currentTask, 1)">
         <div class="card-title">
           <h3 class="border-bottom text-center">TO DO</h3>
-          <ul class=" list-group list-unstyled"
-            *ngFor="let task of taskRep.Read()">
-            <li *ngIf="task.taskStageId == 1" id="dragElement" class="list-group-item border rounded text-center bg-secondary">
+          <div *ngFor="let task of taskRep.Read()" appDroppable (dragStart)="currentTask = task">
+            <div *ngIf="task.taskStageId == 1" class="box-1 border rounded text-center bg-secondary">
               {{task.title}}
-            </li>
-          </ul>
+              <div class="box-2 border rounded text-center bg-secondary" *appDraggableHelper>{{ task.title }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card dropzone" id="cardInProgress">
+      <div class="card dropzone" id="cardInProgress" appDropzone (drop)="move(currentTask, 2)">
         <div class="card-title">
           <h3 class="border-bottom text-center">IN PROGRESS</h3>
-          <ul class="list-group list-unstyled"
-            *ngFor="let task of taskRep.Read()">
-            <li *ngIf="task.taskStageId == 2" id="dragElement" draggable="true" class="list-group-item border rounded text-center bg-secondary">
+          <div *ngFor="let task of taskRep.Read()" appDroppable (dragStart)="currentTask = task">
+            <div *ngIf="task.taskStageId == 2" class="box-1 border rounded text-center bg-secondary">
               {{task.title}}
-            </li>
-          </ul>
+              <div class="box-2 border rounded text-center bg-secondary" *appDraggableHelper>{{ task.title }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div class="col">
-      <div class="card dropzone" id="cardDone">
+      <div class="card dropzone" id="cardDone" appDropzone (drop)="move(currentTask, 3)">
         <div class="card-title">
           <h3 class="border-bottom text-center">DONE</h3>
-          <ul class="list-group list-unstyled"
-            *ngFor="let task of taskRep.Read()">
-            <li *ngIf="task.taskStageId == 3" id="dragElement" draggable="true" class="list-group-item border rounded text-center bg-secondary">
+          <div *ngFor="let task of taskRep.Read()" appDroppable (dragStart)="currentTask = task">
+            <div *ngIf="task.taskStageId == 3" class="box-1 border rounded text-center bg-secondary">
               {{task.title}}
-            </li>
-          </ul>
+              <div class="box-2 border rounded text-center bg-secondary" *appDraggableHelper>{{ task.title }}</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <div class="row">
     <div class="col">
-      <div class="dropzone card card-text bg-secondary text-center" id="dropzone-delete">DRAG TO DELETE
+      <div class="dropzone card card-text bg-secondary text-center" id="dropzone-delete" appDropzone (drop)="delete(currentTask)">DRAG TO DELETE
       </div>
     </div>
   </div>
