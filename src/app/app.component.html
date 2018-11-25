@@ -1,31 +1,29 @@
 <div class="container w-75 text-left border">
-  <div class="row">
-    <div class="col">
-      <div class="row">
-        <div class="col">
-          <label for="task-input">Task:</label><br />
-          <input name="task-input" id="taskInput" [(ngModel)]="newTask.title" required>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <label for="stage-select">Stage:</label><br />
-          <select name="stage-select" id="stageSelect" [(ngModel)]="newTask.taskStageId">
-            <option *ngFor="let stage of stageRep.Read()" [value]="stage.id" [selected]="stage.id == 1">{{stage.name}}
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col">
-          <input type="button" class="btn btn-secondary" value="RESET" (click)="onReset()">
-        </div>
-        <div class="col">
-          <input  type="button" class="btn btn-secondary" value="CREATE" (click)="onCreate()">
-        </div>
+  <form>
+    <div class="form-row">
+      <div class="col">
+        <label for="task-input">Task:</label>
+        <input class="form-control" name="task-input" id="taskInput" [(ngModel)]="newTask.title">
       </div>
     </div>
-  </div>
+    <div class="form-row">
+      <div class="col">
+        <label for="stage-select">Stage:</label>
+        <select class="form-control" name="stage-select" id="stageSelect" [(ngModel)]="newTask.taskStageId">
+          <option *ngFor="let stage of stageRep.Read()" [value]="stage.id" [selected]="stage.id == 1">{{stage.name}}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row my-2 rem">
+      <div class="col">
+        <input type="button" class="btn btn-secondary" value="RESET" (click)="onReset()">
+      </div>
+      <div class="col">
+        <input type="submit" class="btn btn-secondary" value="CREATE" (click)="onCreate()">
+      </div>
+    </div>
+  </form>
   <div class="row">
     <div class="col ">
       <div class="card dropzone" id="cardTodo" appDropzone (drop)="move(currentTask, 1)">
@@ -69,8 +67,10 @@
   </div>
   <div class="row">
     <div class="col">
-      <div class="dropzone card card-text bg-secondary text-center" id="dropzone-delete" appDropzone (drop)="delete(currentTask)">DRAG TO DELETE
+      <div class="dropzone card card-text bg-secondary text-center" id="dropzone-delete" appDropzone (drop)="delete(currentTask)">DRAG
+        TO DELETE
       </div>
     </div>
   </div>
+
 </div>

@@ -35,12 +35,11 @@ export class AppComponent {
   stageSelected = document.getElementById("stageSelect");
 
   onCreate() {
-    if (this.stageSelected.nodeValue.length >= 1) {
+    if (this.newTask.title.length < 1 || this.newTask.taskStageId == 0) {
+      return;
+    }
       this.taskRep.Create(this.newTask)
       this.CreateNewTask();
-    } else {
-      this.CreateNewTask();
-    }
   }
 
   onReset() {
@@ -49,6 +48,7 @@ export class AppComponent {
 
   move(task: Task, taskStageId: number): void {
     task.taskStageId = taskStageId;
+    this.taskRep.Update(task);
   }
 
   delete(task: Task): void {

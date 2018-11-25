@@ -12,18 +12,17 @@ export class TaskRepositoryService implements Repository<Task> {
     if (task.id != 0) {
       throw new Error('Incorect Task Id = ' + task.id + ' for creating.');
     }
-    let id: number;
     if (this.taskArray.length == 0) {
-      id = 1;      
+      task.id = 1;      
     } else {
       this.taskArray.forEach(item => {
-        if (item.id > id) {
-          id = item.id + 1;
+        if (item.id >= task.id) {
+          task.id = item.id + 1;
         }
       })
     }
-    task.id = id;
     this.taskArray.push(task);
+    this.updateLocalstorage();
   }
 
   Read(predicate: ((Task) => boolean) = null): Task[] {
@@ -37,19 +36,25 @@ export class TaskRepositoryService implements Repository<Task> {
   Update(task: Task): void {
     let index = this.taskArray.findIndex(item => item.id == task.id);
     this.taskArray[index] = task;
+    this.updateLocalstorage();
   }
 
   Delete(task: Task): void {
     let index = this.taskArray.findIndex(item => item.id == task.id);
     this.taskArray.splice(index, 1);
+    this.updateLocalstorage();
   }
 
   constructor() {
-    this.taskArray = [
-      new Task( 1, "task1", 1),
-      new Task( 2, "task2", 1),
-      new Task( 3, "task3", 2),
-      new Task( 4, "task4", 3)
-   ];
+    let storageData = localStorage.getItem("TestVantino");
+    if (storageData == null) {
+      this.taskArray = [];
+    } else {
+      this.taskArray = JSON.parse(storageData);
+    }
+  }
+
+  private updateLocalstorage() {
+    localStorage.setItem("TestVantino", JSON.stringify(this.taskArray));
   }
 }
