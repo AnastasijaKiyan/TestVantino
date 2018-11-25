@@ -21,6 +21,14 @@
     color: white;
     padding-top: 55px;
     padding-bottom: auto;
-
-  
+ 
 }
+
+.dropzone-activated {
+      border: 1px solid red;
+    }
+  
+.dropzone-entered {
+      background-color: #efefef;
+    }
+  

@@ -4,9 +4,9 @@ import { Task } from './task';
 import { TaskRepositoryService } from './task-repository.service';
 import { TaskStageRepositoryService } from './task-stage-repository.service';
 
-function remove(item: string, list: string[]) {
-  if (list.indexOf(item) !== -1) {
-    list.splice(list.indexOf(item), 1);
+function remove(newTask: Task, taskRep: Task[]) {
+  if (taskRep.indexOf(newTask) !== -1) {
+    taskRep.splice(taskRep.indexOf(newTask), 1);
   }
 }
 
@@ -19,6 +19,12 @@ function remove(item: string, list: string[]) {
   title = 'TestVantino';
 
   private newTask: Task;
+
+  dropzone1: Task[] = [];
+
+  dropzone2: Task[] = [];
+
+  dropzone3: Task[] = [];
   
   constructor(
    private taskRep: TaskRepositoryService,
@@ -27,9 +33,16 @@ function remove(item: string, list: string[]) {
    }
 
   onCreate() {
-    console.log("Create");
     this.taskRep.Create(this.newTask);
   }
+
+  // onMove(box: string, toList: string[]): void {
+  //   remove(box, this.dropzone1);
+  //   remove(box, this.dropzone2);
+  //   remove(box, this.dropzone3);
+
+  //   toList.push(box);
+  // }
 
  
 
